@@ -8,7 +8,8 @@ public class Util {
                 || isAxiomScheme2(e)
                 || isAxiomScheme3(e)
                 || isAxiomScheme45(e)
-                || isAxiomScheme67(e)
+                || isAxiomScheme6(e)
+                || isAxiomScheme7(e)
                 || isAxiomScheme8(e)
                 || isAxiomScheme9(e)
                 || isAxiomScheme10(e);
@@ -53,11 +54,16 @@ public class Util {
                 || ((And) ((Impl) e).getLeft()).getRight().equals(((Impl) e).getRight()));
     }
 
-    public static boolean isAxiomScheme67(Expression e) {
+    public static boolean isAxiomScheme6(Expression e) {
         return e instanceof Impl
                 && ((Impl) e).getRight() instanceof Or
-                && (((Impl) e).getLeft().equals(((Or) ((Impl) e).getRight()).getRight())
-                || ((Impl) e).getLeft().equals(((Or) ((Impl) e).getRight()).getLeft()));
+                && ((Impl) e).getLeft().equals(((Or) ((Impl) e).getRight()).getLeft());
+    }
+
+    public static boolean isAxiomScheme7(Expression e) {
+        return e instanceof Impl
+                && ((Impl) e).getRight() instanceof Or
+                && ((Impl) e).getLeft().equals(((Or) ((Impl) e).getRight()).getRight());
     }
 
     public static boolean isAxiomScheme8(Expression e) {

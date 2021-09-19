@@ -9,9 +9,4 @@ public class Not extends AbstractUnaryLogicalExpression {
     protected String getSymbol() {
         return "!";
     }
-
-    @Override
-    public String toMiniString() {
-        return toString();
-    }
 }

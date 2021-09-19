@@ -3,6 +3,9 @@ import operators.*;
 public class Util {
     private static Expression subSample = null;
     private static final Variable ZERO = new Variable("0");
+    private static final Variable VAR_A = new Variable("a");
+    private static final Variable VAR_B = new Variable("b");
+    private static final Variable VAR_C = new Variable("c");
 
     public static boolean isAxiomScheme1(Expression e) {
         return e instanceof Impl
@@ -51,13 +54,13 @@ public class Util {
     public static boolean isAxiomScheme6(Expression e) {
         return e instanceof Impl
                 && ((Impl) e).getRight() instanceof Or
-                && ((Impl) e).getLeft().equals(((Or) ((Impl) e).getRight()).getRight());
+                && ((Impl) e).getLeft().equals(((Or) ((Impl) e).getRight()).getLeft());
     }
 
     public static boolean isAxiomScheme7(Expression e) {
         return e instanceof Impl
                 && ((Impl) e).getRight() instanceof Or
-                && ((Impl) e).getLeft().equals(((Or) ((Impl) e).getRight()).getLeft());
+                && ((Impl) e).getLeft().equals(((Or) ((Impl) e).getRight()).getRight());
     }
 
     public static boolean isAxiomScheme8(Expression e) {
@@ -129,10 +132,10 @@ public class Util {
                 && ((Impl) e).getRight() instanceof Equal
                 && ((Equal) ((Impl) e).getRight()).getLeft() instanceof Next
                 && ((Equal) ((Impl) e).getRight()).getRight() instanceof Next
-                && ((Equal) ((Impl) e).getLeft()).getLeft()
-                .equals(((Next) ((Equal) ((Impl) e).getRight()).getLeft()).getExpression())
-                && ((Equal) ((Impl) e).getLeft()).getRight()
-                .equals(((Next) ((Equal) ((Impl) e).getRight()).getRight()).getExpression());
+                && ((Equal) ((Impl) e).getLeft()).getLeft().equals(VAR_A)
+                && ((Equal) ((Impl) e).getLeft()).getRight().equals(VAR_B)
+                && ((Next) ((Equal) ((Impl) e).getRight()).getLeft()).getExpression().equals(VAR_A)
+                && ((Next) ((Equal) ((Impl) e).getRight()).getRight()).getExpression().equals(VAR_B);
     }
 
     public static boolean isAxiom2(Expression e) {
@@ -141,12 +144,12 @@ public class Util {
                 && ((Impl) e).getLeft() instanceof Equal
                 && ((Impl) ((Impl) e).getRight()).getLeft() instanceof Equal
                 && ((Impl) ((Impl) e).getRight()).getRight() instanceof Equal
-                && ((Equal) ((Impl) e).getLeft()).getLeft()
-                .equals(((Equal) ((Impl) ((Impl) e).getRight()).getLeft()).getLeft())
-                && ((Equal) ((Impl) e).getLeft()).getRight()
-                .equals(((Equal) ((Impl) ((Impl) e).getRight()).getRight()).getLeft())
-                && ((Equal) ((Impl) ((Impl) e).getRight()).getLeft()).getRight()
-                .equals(((Equal) ((Impl) ((Impl) e).getRight()).getRight()).getRight());
+                && ((Equal) ((Impl) e).getLeft()).getLeft().equals(VAR_A)
+                && ((Equal) ((Impl) e).getLeft()).getRight().equals(VAR_B)
+                && ((Equal) ((Impl) ((Impl) e).getRight()).getLeft()).getLeft().equals(VAR_A)
+                && ((Equal) ((Impl) ((Impl) e).getRight()).getLeft()).getRight().equals(VAR_C)
+                && ((Equal) ((Impl) ((Impl) e).getRight()).getRight()).getLeft().equals(VAR_B)
+                && ((Equal) ((Impl) ((Impl) e).getRight()).getRight()).getRight().equals(VAR_C);
     }
 
     public static boolean isAxiom3(Expression e) {
@@ -155,17 +158,18 @@ public class Util {
                 && ((Impl) e).getRight() instanceof Equal
                 && ((Equal) ((Impl) e).getLeft()).getLeft() instanceof Next
                 && ((Equal) ((Impl) e).getLeft()).getRight() instanceof Next
-                && ((Next) ((Equal) ((Impl) e).getLeft()).getLeft()).getExpression()
-                .equals(((Equal) ((Impl) e).getRight()).getLeft())
-                && ((Next) ((Equal) ((Impl) e).getLeft()).getRight()).getExpression()
-                .equals(((Equal) ((Impl) e).getRight()).getRight());
+                && ((Next) ((Equal) ((Impl) e).getLeft()).getLeft()).getExpression().equals(VAR_A)
+                && ((Next) ((Equal) ((Impl) e).getLeft()).getRight()).getExpression().equals(VAR_B)
+                && ((Equal) ((Impl) e).getRight()).getLeft().equals(VAR_A)
+                && ((Equal) ((Impl) e).getRight()).getRight().equals(VAR_B);
     }
 
     public static boolean isAxiom4(Expression e) {
-        return e instanceof Equal
-                && ((Equal) e).getRight().equals(ZERO)
-                && ((Equal) e).getLeft() instanceof Not
-                && ((Not) ((Equal) e).getLeft()).getExpression() instanceof Next;
+        return e instanceof Not
+                && ((Not) e).getExpression() instanceof Equal
+                && ((Equal) ((Not) e).getExpression()).getLeft() instanceof Next
+                && ((Equal) ((Not) e).getExpression()).getRight().equals(ZERO)
+                && ((Next) ((Equal) ((Not) e).getExpression()).getLeft()).getExpression().equals(VAR_A);
     }
 
     public static boolean isAxiom5(Expression e) {
@@ -174,24 +178,26 @@ public class Util {
                 && ((Add) ((Equal) e).getLeft()).getRight() instanceof Next
                 && ((Equal) e).getRight() instanceof Next
                 && ((Next) ((Equal) e).getRight()).getExpression() instanceof Add
-                && ((Add) ((Equal) e).getLeft()).getLeft()
-                .equals(((Add) ((Next) ((Equal) e).getRight()).getExpression()).getLeft())
-                && ((Next) ((Add) ((Equal) e).getLeft()).getRight()).getExpression()
-                .equals(((Add) ((Next) ((Equal) e).getRight()).getExpression()).getRight());
+                && ((Add) ((Equal) e).getLeft()).getLeft().equals(VAR_A)
+                && ((Next) ((Add) ((Equal) e).getLeft()).getRight()).getExpression().equals(VAR_B)
+                && ((Add) ((Next) ((Equal) e).getRight()).getExpression()).getLeft().equals(VAR_A)
+                && ((Add) ((Next) ((Equal) e).getRight()).getExpression()).getRight().equals(VAR_B);
     }
 
     public static boolean isAxiom6(Expression e) {
         return e instanceof Equal
                 && ((Equal) e).getLeft() instanceof Add
                 && ((Add) ((Equal) e).getLeft()).getRight().equals(ZERO)
-                && ((Add) ((Equal) e).getLeft()).getLeft().equals(((Equal) e).getRight());
+                && ((Add) ((Equal) e).getLeft()).getLeft().equals(VAR_A)
+                && ((Equal) e).getRight().equals(VAR_A);
     }
 
     public static boolean isAxiom7(Expression e) {
         return e instanceof Equal
                 && ((Equal) e).getLeft() instanceof Mul
                 && ((Mul) ((Equal) e).getLeft()).getRight().equals(ZERO)
-                && ((Equal) e).getRight().equals(ZERO);
+                && ((Equal) e).getRight().equals(ZERO)
+                && ((Mul) ((Equal) e).getLeft()).getLeft().equals(VAR_A);
     }
 
     public static boolean isAxiom8(Expression e) {
@@ -200,12 +206,11 @@ public class Util {
                 && ((Mul) ((Equal) e).getLeft()).getRight() instanceof Next
                 && ((Equal) e).getRight() instanceof Add
                 && ((Add) ((Equal) e).getRight()).getLeft() instanceof Mul
-                && ((Mul) ((Equal) e).getLeft()).getLeft()
-                .equals(((Mul) ((Add) ((Equal) e).getRight()).getLeft()).getLeft())
-                && ((Mul) ((Equal) e).getLeft()).getLeft()
-                .equals(((Add) ((Equal) e).getRight()).getRight())
-                && ((Next) ((Mul) ((Equal) e).getLeft()).getRight()).getExpression()
-                .equals(((Mul) ((Add) ((Equal) e).getRight()).getLeft()).getRight());
+                && ((Mul) ((Equal) e).getLeft()).getLeft().equals(VAR_A)
+                && ((Next) ((Mul) ((Equal) e).getLeft()).getRight()).getExpression().equals(VAR_B)
+                && ((Mul) ((Add) ((Equal) e).getRight()).getLeft()).getLeft().equals(VAR_A)
+                && ((Mul) ((Add) ((Equal) e).getRight()).getLeft()).getRight().equals(VAR_B)
+                && ((Add) ((Equal) e).getRight()).getRight().equals(VAR_A);
     }
 
     public static boolean isAxiomSchemeA9(Expression e) {
@@ -253,7 +258,7 @@ public class Util {
                 if (!((AbstractQuantifier) e).getVariable()
                         .equals(((AbstractQuantifier) sub).getVariable())) {
                     return false;
-                };
+                }
                 return subsCorrectlyInAx(
                         ((AbstractQuantifier) e).getExpression(),
                         ((AbstractQuantifier) sub).getExpression(),

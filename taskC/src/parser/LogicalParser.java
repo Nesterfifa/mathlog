@@ -101,7 +101,7 @@ public class LogicalParser extends BaseParser {
                 nextChar();
                 return makeQuantifierOperation(unaryOperator, quantifierVariable, parseExpression(0));
             } else {
-                return makeNot(parseSimpleExpression());
+                return makeNot(parseExpression(3));
             }
         } else {
             return parseVariable();

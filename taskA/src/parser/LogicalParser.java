@@ -110,7 +110,7 @@ public class LogicalParser extends BaseParser {
     private Expression parseVariable() {
         final StringBuilder builder = new StringBuilder();
         while (between('A', 'Z')
-                || builder.length() > 0 && (between('0', '9') || ch == '’')) {
+                || builder.length() > 0 && (between('0', '9') || ch == '\'')) {
             builder.append(ch);
             nextChar();
         }

@@ -22,10 +22,11 @@ public class Main {
         if (provenImplRightToLeft.containsKey(e)) {
             for (Integer left : provenImplRightToLeft.get(e)) {
                 if (proven.contains(((AbstractBinaryLogicalExpression) expressionList.get(left)).getLeft())) {
-                    return new int[]{
+                    return new int[] {
                             expressionToIndex.get(
                                     ((AbstractBinaryLogicalExpression) expressionList.get(left)).getLeft()),
-                            left };
+                            left
+                    };
                 }
             }
         }
@@ -35,6 +36,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Expression proving = new LogicalParser('\0', new StringSource(scanner.nextLine().substring(2))).parse();
+        System.out.println("|-" + proving);
         int cnt = 1;
         expressionList.add(null);
         while (scanner.hasNextLine()) {
@@ -42,73 +44,50 @@ public class Main {
             final int[] mp = findModusPonens(proofStage);
             Object check11 = Util.isAxiomScheme11(proofStage);
             Object check12 = Util.isAxiomScheme12(proofStage);
-            boolean correctLast = scanner.hasNextLine() || proofStage.equals(proving);
-            if (Util.isAxiomScheme1(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            if (Util.isAxiomScheme1(proofStage)) {
                 annotateScheme(cnt, "1", proofStage);
-            } else if (Util.isAxiomScheme2(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme2(proofStage)) {
                 annotateScheme(cnt, "2", proofStage);
-            } else if (Util.isAxiomScheme3(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme3(proofStage)) {
                 annotateScheme(cnt, "3", proofStage);
-            } else if (Util.isAxiomScheme4(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme4(proofStage)) {
                 annotateScheme(cnt, "4", proofStage);
-            } else if (Util.isAxiomScheme5(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme5(proofStage)) {
                 annotateScheme(cnt, "5", proofStage);
-            } else if (Util.isAxiomScheme6(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme6(proofStage)) {
                 annotateScheme(cnt, "6", proofStage);
-            } else if (Util.isAxiomScheme7(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme7(proofStage)) {
                 annotateScheme(cnt, "7", proofStage);
-            } else if (Util.isAxiomScheme8(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme8(proofStage)) {
                 annotateScheme(cnt, "8", proofStage);
-            } else if (Util.isAxiomScheme9(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme9(proofStage)) {
                 annotateScheme(cnt, "9", proofStage);
-            } else if (Util.isAxiomScheme10(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomScheme10(proofStage)) {
                 annotateScheme(cnt, "10", proofStage);
-            } else if (check11.equals(true) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (check11.equals(true)) {
                 annotateScheme(cnt, "11", proofStage);
-            } else if (check12.equals(true) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (check12.equals(true)) {
                 annotateScheme(cnt, "12", proofStage);
-            } else if (Util.isAxiom1(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiom1(proofStage)) {
                 annotateAx(cnt, "A1", proofStage);
-            } else if (Util.isAxiom2(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiom2(proofStage)) {
                 annotateAx(cnt, "A2", proofStage);
-            } else if (Util.isAxiom3(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiom3(proofStage)) {
                 annotateAx(cnt, "A3", proofStage);
-            } else if (Util.isAxiom4(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiom4(proofStage)) {
                 annotateAx(cnt, "A4", proofStage);
-            } else if (Util.isAxiom5(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiom5(proofStage)) {
                 annotateAx(cnt, "A5", proofStage);
-            } else if (Util.isAxiom6(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiom6(proofStage)) {
                 annotateAx(cnt, "A6", proofStage);
-            } else if (Util.isAxiom7(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiom7(proofStage)) {
                 annotateAx(cnt, "A7", proofStage);
-            } else if (Util.isAxiom8(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiom8(proofStage)) {
                 annotateAx(cnt, "A8", proofStage);
-            } else if (Util.isAxiomSchemeA9(proofStage) && correctLast) {
-                System.out.println("|-" + proofStage);
+            } else if (Util.isAxiomSchemeA9(proofStage)) {
                 annotateScheme(cnt, "A9", proofStage);
-            } else if (mp != null && correctLast) {
-                System.out.println("|-" + proofStage);
-                System.out.println("[" + cnt + ". M.P. " + mp[0] + ", " + mp[1] + "]");
+            } else if (mp != null) {
+                System.out.println("[" + cnt + ". M.P. " + mp[0] + ", " + mp[1] + "] " + proofStage);
             } else if (proofStage instanceof Impl
                     && ((Impl) proofStage).getLeft() instanceof Exists
                     && proven.contains(
@@ -117,16 +96,11 @@ public class Main {
                                     ((Impl) proofStage).getRight()))) {
                 if (!((Impl) proofStage).getRight().getFreeVars().contains(
                         ((Exists) ((Impl) proofStage).getLeft()).getVariable())) {
-                    if (correctLast) {
-                        System.out.println("|-" + proofStage);
-                        System.out.println(
-                                "[" + cnt + ". ?-intro " + expressionToIndex.get(
-                                        new Impl(
-                                                ((Exists) ((Impl) proofStage).getLeft()).getExpression(),
-                                                ((Impl) proofStage).getRight())) + "]");
-                    } else {
-                        System.out.println("The proof proves different expresion.");
-                    }
+                    System.out.println(
+                            "[" + cnt + ". ?-intro " + expressionToIndex.get(
+                                    new Impl(
+                                            ((Exists) ((Impl) proofStage).getLeft()).getExpression(),
+                                            ((Impl) proofStage).getRight())) + "] " + proofStage);
                 } else {
                     System.out.println("Expression "
                                     + cnt
@@ -143,16 +117,11 @@ public class Main {
                                     ((ForAll) ((Impl) proofStage).getRight()).getExpression()))) {
                 if (!((Impl) proofStage).getLeft().getFreeVars().contains(
                         ((ForAll) ((Impl) proofStage).getRight()).getVariable())) {
-                    if (correctLast) {
-                        System.out.println("|-" + proofStage);
-                        System.out.println(
-                                "[" + cnt + ". @-intro " + expressionToIndex.get(
-                                        new Impl(
-                                                ((Impl) proofStage).getLeft(),
-                                                ((ForAll) ((Impl) proofStage).getRight()).getExpression())) + "]");
-                    } else {
-                        System.out.println("The proof proves different expresion.");
-                    }
+                    System.out.println(
+                            "[" + cnt + ". @-intro " + expressionToIndex.get(
+                                    new Impl(
+                                            ((Impl) proofStage).getLeft(),
+                                            ((ForAll) ((Impl) proofStage).getRight()).getExpression())) + "] " + proofStage);
                 } else {
                     System.out.println("Expression "
                             + cnt
@@ -179,11 +148,9 @@ public class Main {
                         + check11
                         + " in @-axiom.");
                 return;
-            } else if (correctLast) {
+            } else {
                 System.out.println("Expression " + cnt + " is not proved.");
                 return;
-            } else {
-                System.out.println("The proof proves different expression.");
             }
             int finalCnt = cnt;
             expressionList.add(proofStage);
@@ -196,6 +163,10 @@ public class Main {
                         new LinkedHashSet<>());
                 provenImplRightToLeft.get(((Impl) proofStage).getRight())
                         .add(finalCnt);
+            }
+            if (!scanner.hasNextLine() && !proofStage.equals(proving)) {
+                System.out.println("The proof proves different expression.");
+                return;
             }
         }
     }

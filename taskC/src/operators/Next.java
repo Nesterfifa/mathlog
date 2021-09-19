@@ -7,7 +7,7 @@ public class Next extends AbstractUnaryLogicalExpression {
 
     @Override
     protected String getSymbol() {
-        return "’";
+        return "'";
     }
 
     @Override
